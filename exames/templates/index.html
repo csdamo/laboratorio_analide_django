@@ -30,76 +30,24 @@
     <section class="best-receipe-area">
         <div class="container">
             <div class="row">
-                <!-- Single Best Receipe Area -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-best-receipe-area mb-30">
-                        <img src="{% static 'img/bg-img/exame.png' %}" alt="">
-                        <div class="receipe-content">
-                            <a href="receita.html">
-                                <h5>Hemograma completo</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                {% if exames %}
+                {% for exame in exames %}
 
                 <!-- Single Best Receipe Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-best-receipe-area mb-30">
                         <img src="{% static 'img/bg-img/exame.png' %}" alt="">
                         <div class="receipe-content">
-                            <a href="receita.html">
-                                <h5>Glicose (glicemia basal)</h5>
+                            <a href="{% url 'exame' exame.id %}">
+                                <h5>{{exame.nome_do_exame}}</h5>
                             </a>
                         </div>
                     </div>
                 </div>
-                                <!-- Single Best Receipe Area -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-best-receipe-area mb-30">
-                        <img src="{% static 'img/bg-img/exame.png' %}" alt="">
-                        <div class="receipe-content">
-                            <a href="receita.html">
-                                <h5>Colesterol Total</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                                <!-- Single Best Receipe Area -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-best-receipe-area mb-30">
-                        <img src="{% static 'img/bg-img/exame.png' %}" alt="">
-                        <div class="receipe-content">
-                            <a href="receita.html">
-                                <h5>HIV1 e HIV2 - Anticorpos totais</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    {% endfor %}
+    {% else %}
+    {% endif %}
 
-                <!-- Single Best Receipe Area -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-best-receipe-area mb-30">
-                        <img src="{% static 'img/bg-img/exame.png' %}" alt="">
-                        <div class="receipe-content">
-                            <a href="receita.html">
-                                <h5>Grupo Sanguíneo</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single Best Receipe Area -->
-                <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="single-best-receipe-area mb-30">
-                        <img src="{% static 'img/bg-img/exame.png' %}" alt="">
-                        <div class="receipe-content">
-                            <a href="receita.html">
-                                <h5>Teste de Tolerância a Lactose</h5>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                
             </div>
         </div>
     </section>

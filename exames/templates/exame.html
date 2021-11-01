@@ -52,7 +52,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="receipe-slider owl-carousel">
-                        <img src="{% static 'img/bg-img/tomate_banner.jpg' %}">
+                        <img src="{% static 'img/bg-img/Lab-Medicine-banner.jpg' %}">
                     </div>
                 </div>
             </div>
@@ -65,13 +65,12 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="receipe-headline my-5">
-                            <span>30 de Fevereiro, 2000</span>
-                            <h2>Nome da receita</h2>
+                          <!--  <span>30 de Fevereiro, 2000</span> -->
+                            <h2>{{exame.nome_do_exame}}</h2>
                             <div class="receipe-duration">
-                                <h6>Preparo: 15 minutos</h6>
-                                <h6>Rendimento: 2 porçoes</h6>
-                                <h6>Categoria: categoria</h6>
-                                <h6>Por: Pessoa</h6>
+                                <h6>Preparo: {{exame.preparo_para_exame }}</h6>
+                                <h6>Duração do exame: {{exame.tempo_para_realizacao_exame}} minutos</h6>
+                                <h6>Valor do exame: R$ {{exame.valor_exame}}</h6>
                             </div>
                         </div>
                     </div>
@@ -79,24 +78,12 @@
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <!-- Single Preparation Step -->
+                        <h4>Sobre o exame</h4>
                         <div class="single-preparation-step d-flex">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                        </div>
-                    </div>
-
-                    <!-- Ingredientes -->
-                    <div class="col-12 col-lg-4">
-                        <div class="ingredients">
-                            <h4>Ingredientees</h4>
-                            <div class="ingredients">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec varius dui. Suspendisse potenti. Vestibulum ac pellentesque tortor. Aenean congue sed metus in iaculis. Cras a tortor enim. Phasellus posuere vestibulum ipsum, eget lobortis purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                            </p>
-                            </div>
+                            <p>{{exame.sobre_o_exame}} </p>
                         </div>
                     </div>
                 </div>
-                <!-- Ingredientes -->
 
 {% include  'partials/_footer.html' %}
 {% endblock %}
-
