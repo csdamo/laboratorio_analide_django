@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
+from exames.models import ResultadoExame
 
 
 def cadastro(request):
@@ -60,19 +61,19 @@ def logout(request):
 
 
 def dashboard(request):
-    """
-    ''' Mostra receitas do usuário na sua página quando ele está logado '''
+    ''' Mostra exame do usuário na sua página quando ele está logado '''
+
     if request.user.is_authenticated:
         id = request.user.id
-        receitas = Receita.objects.order_by('-date_receita').filter(pessoa=id)
+        resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(nome_paciente=id)
 
         dados = {
-            'receitas': receitas
+            'resultados': resultados
         }
         return render(request, 'usuarios/dashboard.html', dados)
     else:
-        return redirect('index')"""
-    pass
+        return redirect('index')
+
 
 
 def campo_vazio(campo):

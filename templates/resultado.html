@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Receipe Content Area -->
         <div class="receipe-content-area">
             <div class="container">
@@ -29,24 +29,22 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <div class="receipe-headline my-5">
-                          <!--  <span>30 de Fevereiro, 2000</span> -->
-                            <h2>{{exame.nome_do_exame}}</h2>
+                          <span>{{resultado.date_do_resultado}}</span>
+                            <h2>{{resultado.nome_do_exame}}</h2>
                             <div class="receipe-duration">
-                                <h6>Preparo: {{exame.preparo_para_exame }}</h6>
-                                <h6>Duração do exame: {{exame.tempo_para_realizacao_exame}} minutos</h6>
-                                <h6>Valor do exame: R$ {{exame.valor_exame}}</h6>
+                                <h6>Paciente: {{resultado.nome_paciente }}</h6>
+                                <h6>Médico requerente: {{resultado.medico_requerente}}</h6>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <!-- Single Preparation Step -->
-                        <h4>Sobre o exame</h4>
+                        <h4>Laudo:</h4>
                         <div class="single-preparation-step d-flex">
-                            <p>{{exame.sobre_o_exame}} </p>
+                            <p>{{resultado.laudo_exame}} </p>
                         </div>
                     </div>
                 </div>
