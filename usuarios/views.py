@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth, messages
 from exames.models import ResultadoExame
+#from exames.models import Medico
 
 
 def cadastro(request):
@@ -28,8 +29,12 @@ def cadastro(request):
         if User.objects.filter(username=nome).exists():
             messages.error(request, 'Usuário já cadastrado')
             return redirect('cadastro')
+
         user = User.objects.create_user(username=nome, email=email, password=password)
+       # medico = Medico.objects.create(medico=nome)
         user.save()
+        #medico.save()
+
         messages.success(request, 'Usuário cadastrado com sucesso')
         return redirect('login')
 
@@ -65,7 +70,12 @@ def dashboard(request):
 
     if request.user.is_authenticated:
         id = request.user.id
-        resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(nome_paciente=id)
+        if request.user.is_superuser:
+            resultados = ResultadoExame.objects.order_by('-date_do_resultado')
+        elif request.user.is_staff:
+            resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(medico_requerente='Alice')
+        else:
+            resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(nome_paciente=id)
 
         dados = {
             'resultados': resultados
@@ -73,7 +83,6 @@ def dashboard(request):
         return render(request, 'usuarios/dashboard.html', dados)
     else:
         return redirect('index')
-
 
 
 def campo_vazio(campo):

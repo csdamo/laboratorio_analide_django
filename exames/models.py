@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class Exame(models.Model):
@@ -24,6 +24,20 @@ class ResultadoExame(models.Model):
     laudo_exame = models.TextField()
     arquivo_exame = models.ImageField(upload_to='fotos/%d/%m/%y/', blank=True)
     publicada = models.BooleanField(default=False)
+
+    def __int__(self):
+        return self.nome_paciente
+
+"""class Medico(models.Model):
+    medico = models.CharField(max_length=100)"""
+
+
+class RequisicaoExame(models.Model):
+    nome_do_exame = models.ForeignKey(Exame, on_delete=models.CASCADE)
+    nome_paciente = models.ForeignKey(User, on_delete=models.CASCADE,)
+    #medico_requerente = models.ForeignKey(Medico, on_delete=models.CASCADE)
+    date_da_requisicao = models.DateTimeField(default=datetime.now, blank=True)
+
 
     def __int__(self):
         return self.nome_paciente

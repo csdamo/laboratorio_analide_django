@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Exame, ResultadoExame
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Exame, ResultadoExame, RequisicaoExame
+from django.contrib.auth.models import User
+
 
 def index(request):
     exames = Exame.objects.all()
@@ -31,3 +33,16 @@ def resultado(request, resultado_id):
         'resultado':resultado
     }
     return render(request, 'resultado.html', resultado_a_ser_exibido)
+
+
+def requisicao(request):
+    """if request.method == 'POST':
+        nome_do_exame = request.POST['nome_do_exame']
+        nome_paciente = request.POST['nome_paciente']
+        medico_requerente = get_object_or_404(User, pk=request.user.id)
+
+        requisicao = RequisicaoExame.objects.create(medico_requerente=medico_requerente, nome_paciente=nome_paciente, nome_do_exame=nome_do_exame,)
+        requisicao.save()
+        return redirect('index')
+    else:"""
+    return render(request, 'cadastrar_requisicoes.html')

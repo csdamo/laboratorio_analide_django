@@ -1,6 +1,5 @@
 from django.contrib import admin
-from exames.models import Exame, ResultadoExame
-
+from exames.models import Exame, ResultadoExame, RequisicaoExame
 
 class ListandoExames(admin.ModelAdmin):
     list_display = ('id', 'nome_do_exame', 'valor_exame')
@@ -17,5 +16,15 @@ class ListandoResultados(admin.ModelAdmin):
     list_per_page = 10
 
 
+class ListandoRequisicaoExame(admin.ModelAdmin):
+    list_display = ('id', 'nome_paciente', 'nome_do_exame',)
+    list_display_links = ('id', 'nome_paciente', 'nome_do_exame')
+    search_fields = ('nome_paciente', 'nome_do_exame')
+    list_filter = ('nome_paciente', 'nome_do_exame')
+    list_per_page = 10
+
+
 admin.site.register(Exame, ListandoExames)
 admin.site.register(ResultadoExame, ListandoResultados)
+admin.site.register(RequisicaoExame, ListandoRequisicaoExame)
+#admin.site.register(Medico)
