@@ -6,6 +6,4 @@ class ListandoUsuario(admin.ModelAdmin):
     list_display_links = ('id', 'nome_usuario',)
     list_editable = ('is_staff',)
 
-admin.site.register(User, ListandoUsuario)
-
-"""
+admin.site.register(User, ListandoUsuario)"""

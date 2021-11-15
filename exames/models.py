@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 
 
 class Exame(models.Model):
@@ -16,6 +16,26 @@ class Exame(models.Model):
     def __str__(self):
         return self.nome_do_exame
 
+
+class Medico(models.Model):
+    medico = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.medico
+
+
+class RequisicaoExame(models.Model):
+    nome_do_exame = models.ForeignKey(Exame, on_delete=models.CASCADE)
+    nome_paciente = models.ForeignKey(User, on_delete=models.CASCADE,)
+    medico_requerente = models.ForeignKey(Medico, on_delete=models.CASCADE, null=True)
+    #medico_requerente = models.CharField(max_length=10, default=User.pk)
+    date_da_requisicao = models.DateTimeField(default=datetime.now, blank=True)
+
+
+    def __int__(self):
+        return self.id
+
+
 class ResultadoExame(models.Model):
     nome_do_exame = models.ForeignKey(Exame, on_delete=models.CASCADE)
     nome_paciente = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -28,16 +48,3 @@ class ResultadoExame(models.Model):
     def __int__(self):
         return self.nome_paciente
 
-"""class Medico(models.Model):
-    medico = models.CharField(max_length=100)"""
-
-
-class RequisicaoExame(models.Model):
-    nome_do_exame = models.ForeignKey(Exame, on_delete=models.CASCADE)
-    nome_paciente = models.ForeignKey(User, on_delete=models.CASCADE,)
-    #medico_requerente = models.ForeignKey(Medico, on_delete=models.CASCADE)
-    date_da_requisicao = models.DateTimeField(default=datetime.now, blank=True)
-
-
-    def __int__(self):
-        return self.nome_paciente

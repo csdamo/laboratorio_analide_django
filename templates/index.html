@@ -20,7 +20,13 @@
                 <!-- Single Best Receipe Area -->
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="single-best-receipe-area mb-30">
-                        <img src="{% static 'img/bg-img/exame.png' %}" alt="">
+                          {% if exame.foto_exame == '' %}
+                            <img src="{% static 'img/bg-img/exame.png' %}" alt="">
+                        {% else %}
+                            <img src="{{ exame.foto_exame.url }}" alt="">
+                        {% endif %}
+
+
                         <div class="receipe-content">
                             <a href="{% url 'exame' exame.id %}">
                                 <h5>{{exame.nome_do_exame}}</h5>

@@ -60,7 +60,7 @@
 
                                     {% if user.is_authenticated %}
                                         {% if user.is_superuser %}
-                                            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                                            <li><a href="{% url 'admin:index' %}">Área restrita</a></li>
                                         {% endif %}
                                         <li><a href="{% url 'dashboard' %}">Resultado dos exames</a></li>
 
