@@ -76,10 +76,6 @@ def requisicao_list(request):
 
 
 
-
-
-
-
 # MÉTODO PARA USO DO FORMS com laudo prépreenchido
 def cadastrar_resultado(request, requisicao_id):
     requisicao = get_object_or_404(RequisicaoExame, pk=requisicao_id)
@@ -90,7 +86,7 @@ def cadastrar_resultado(request, requisicao_id):
             'nome_do_exame': requisicao.nome_do_exame,
             'nome_paciente': requisicao.nome_paciente,
             'medico_requerente': requisicao.medico_requerente,
-            'laudo_exame': 'valor glicose em mg/dl: '
+            'laudo_exame': 'glicemia em jejum mg/dl: '
         })
 
     if str(requisicao.nome_do_exame) == 'teste de colesterol':
@@ -99,7 +95,7 @@ def cadastrar_resultado(request, requisicao_id):
             'nome_do_exame': requisicao.nome_do_exame,
             'nome_paciente': requisicao.nome_paciente,
             'medico_requerente': requisicao.medico_requerente,
-            'laudo_exame': 'valor colesterol toal em mg/dl: '
+            'laudo_exame': 'Colesterol LDL em mg/dl: '
         })
 
     if str(requisicao.nome_do_exame) == 'teste de covid':
@@ -108,7 +104,7 @@ def cadastrar_resultado(request, requisicao_id):
             'nome_do_exame': requisicao.nome_do_exame,
             'nome_paciente': requisicao.nome_paciente,
             'medico_requerente': requisicao.medico_requerente,
-            'laudo_exame': 'valor colesterol toal em mg/dl: '
+            'laudo_exame': 'RT-PCR (P/N): '
         })
 
     if str(requisicao.nome_do_exame) == 'teste toxicológico':
@@ -117,7 +113,7 @@ def cadastrar_resultado(request, requisicao_id):
             'nome_do_exame': requisicao.nome_do_exame,
             'nome_paciente': requisicao.nome_paciente,
             'medico_requerente': requisicao.medico_requerente,
-            'laudo_exame': 'valor colesterol toal em mg/dl: '
+            'laudo_exame': 'SEGMED - PCP (N/P): '
         })
 
     contexto = {
