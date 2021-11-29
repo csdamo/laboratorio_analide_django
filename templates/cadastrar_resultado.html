@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/tubobolhas.png' %}" alt="">
+    </div>
+
+    {% include 'partials/_busca.html' %}
+    {% include 'partials/_menu.html' %}
+
+<div class="container col-8">
+    <h2>Cadastro de resultado de exames</h2>
+
+{% include 'partials/_alertas.html' %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <div class="section-heading">
+                   <h3>Informe o resultado do paciente: {{ requisicao.nome_paciente }}</h3>
+               </div>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col-12">
+               <div class="container col-10">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        {{form|crispy}}
+
+                        <input type="submit" value="Salvar" class="btn btn-success">
+                    </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+<!--
+<script>
+    function Hide()
+        {
+        console.log("teste")
+            if (document.getElementById('id_tipo_exame').options[document.getElementById('id_tipo_exame').selectedIndex].value == "glicose") {
+                document.getElementById('glicose').style.display = ''; //Exibindo
+                document.getElementById('colesterol').style.display = 'none'; // Escondido
+                document.getElementById('covid').style.display = 'none'; //Escondido
+            }
+            if (document.getElementById('id_tipo_exame').options[document.getElementById('id_tipo_exame').selectedIndex].value == "colesterol"){
+                document.getElementById('glicose').style.display = 'none';
+                document.getElementById('colesterol').style.display = '';
+                document.getElementById('covid').style.display = 'none';
+            }
+            if (document.getElementById('id_tipo_exame').options[document.getElementById('id_tipo_exame').selectedIndex].value == "teste Covid"){
+                document.getElementById('glicose').style.display = 'none';
+                document.getElementById('colesterol').style.display = 'none';
+                document.getElementById('covid').style.display = '';
+            }
+
+        }
+</script>
+
+<script type="text/javascript">
+    window.addEventListener("load", Hide);
+    var el = document.getElementById("id_tipo_exame");
+    console.log(el)
+    el.addEventListener("select", Hide);
+</script>
+
+-->
+
+
+{% include  'partials/_footer.html' %}
+{% endblock %}>

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/tubobolhas.png' %}" alt="">
+    </div>
+
+    {% include 'partials/_busca.html' %}
+    {% include 'partials/_menu.html' %}
+
+<div class="container col-8">
+    <h2>Requisicao</h2>
+
+    <div class="container col-12">
+        <table border="0" class="table table-striped">
+            {% if requisicoes %}
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Paciente</th>
+                    <th scope="col">Médico requerente</th>
+                    <th scope="col">Nome do exame</th>
+                    <th scope="col">Data da requisição</th>
+
+                </tr>
+              </thead>
+                {% for requisicao in requisicoes %}
+              <tbody>
+                <tr>
+                  <th scope="row">{{requisicao.id}}</th>
+                  <td>{{requisicao.nome_paciente}}</td>
+                  <td>{{requisicao.medico_requerente}}</td>
+                  <td>{{requisicao.nome_do_exame}}</td>
+                  <td>{{requisicao.date_da_requisicao}}</td>
+                  <!--<td><a href="" type="button" class="btn btn-success">Edit</a></td>
+                  <td><a href="" type="button" class="btn btn-danger">Del</a></td> -->
+
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <td><a href="{% url 'cadastrar_resultado' requisicao.id %}" type="button" class="btn btn-info">Cadastrar Resultado de Exame</a></td>
+                        {% endif %}
+
+                        {% if  user.is_staff and not user.is_superuser %}
+                            <!-- <td><a href="" type="button" class="btn btn-info">Ver requisição</a></td> -->
+                        {% endif %}
+                    {% endif %}
+
+
+
+                </tr>
+              </tbody>
+            {% endfor %}
+        </table>
+
+        {% else %}
+        <h4>Nenhuma requisicao cadastrada</h4>
+        {% endif %}
+    </div>
+</div>
+{% include  'partials/_footer.html' %}
+{% endblock %}>

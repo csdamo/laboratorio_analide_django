@@ -67,14 +67,17 @@ def logout(request):
 
 def dashboard(request):
     ''' Mostra exame do usuário na sua página quando ele está logado '''
-
     if request.user.is_authenticated:
         id = request.user.id
         if request.user.is_superuser:
             resultados = ResultadoExame.objects.order_by('-date_do_resultado')
         elif request.user.is_staff:
-            nome_medico = request.user.username
-            resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(medico_requerente=nome_medico)
+            nome = request.user.username
+            nome_str = str(nome)
+            med = get_object_or_404(Medico, medico=nome_str)
+            id_med = med.id
+            print(id_med)
+            resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(medico_requerente=id_med)
         else:
             resultados = ResultadoExame.objects.order_by('-date_do_resultado').filter(nome_paciente=id)
 
