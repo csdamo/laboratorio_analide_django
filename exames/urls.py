@@ -8,4 +8,5 @@ urlpatterns = [
     path('resultado/<int:resultado_id>', views.resultado, name='resultado'),
     path('requisicao', views.requisicao_list, name='requisicao_list'),
     path('cadastrar_resultado/<int:requisicao_id>', views.cadastrar_resultado, name='cadastrar_resultado'),
+    path('requisicao_cadastro', views.cria_requisicao, name='cria_requisicao'),
 ]

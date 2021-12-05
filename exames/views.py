@@ -5,11 +5,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template.defaultfilters import date
 
 from .models import Exame, ResultadoExame, RequisicaoExame, Medico
-from .forms import ResultadoForms
+from .forms import ResultadoForms, RequisicaoForm
 from django.contrib.auth.models import User
 
 
 def index(request):
+
     exames = Exame.objects.all()
     dados = {
         'exames':exames
@@ -43,6 +44,34 @@ def resultado(request, resultado_id):
         # 'requisitos':requisitos,
     }
     return render(request, 'resultado.html', resultado_a_ser_exibido)
+
+
+def cria_requisicao(request):
+    nome = request.user.username
+    nome_str = str(nome)
+    med = get_object_or_404(Medico, medico=nome_str)
+    id_med = med.id
+
+    form = RequisicaoForm(initial={
+        'medico_requerente': id_med})
+
+    contexto = {
+        'form': form,
+    }
+    if request.method == 'POST':
+        form = RequisicaoForm(request.POST)
+        if form.is_valid():
+            requisicao = form.save(commit=False)
+            requisicao.save()
+            messages.success(request, 'Resultado cadastrado com sucesso')
+            return redirect('requisicao_list')
+
+        else:
+            messages.warning(request, 'Registro não foi salvo')
+            return render(request, 'requisicao_cadastro.html', contexto)
+    return render(request, 'requisicao_cadastro.html', contexto)
+
+
 
 
 def requisicao_list(request):
@@ -79,8 +108,15 @@ def requisicao_list(request):
 # MÉTODO PARA USO DO FORMS com laudo prépreenchido
 def cadastrar_resultado(request, requisicao_id):
     requisicao = get_object_or_404(RequisicaoExame, pk=requisicao_id)
+    form = ResultadoForms()
 
-    if str(requisicao.nome_do_exame) == 'teste de glicose':
+    nom_exam = requisicao.nome_do_exame
+    exame = Exame.objects.filter(nome_do_exame=nom_exam)
+
+    print()
+
+
+    if str(requisicao.nome_do_exame) == 'Teste de glicose':
         form = ResultadoForms(initial={
             'requisicao': requisicao,
             'nome_do_exame': requisicao.nome_do_exame,
@@ -89,7 +125,7 @@ def cadastrar_resultado(request, requisicao_id):
             'laudo_exame': 'glicemia em jejum mg/dl: '
         })
 
-    if str(requisicao.nome_do_exame) == 'teste de colesterol':
+    if str(requisicao.nome_do_exame) == 'Teste de colesterol':
         form = ResultadoForms(initial={
             'requisicao': requisicao,
             'nome_do_exame': requisicao.nome_do_exame,
@@ -98,22 +134,22 @@ def cadastrar_resultado(request, requisicao_id):
             'laudo_exame': 'Colesterol LDL em mg/dl: '
         })
 
-    if str(requisicao.nome_do_exame) == 'teste de covid':
+    if str(requisicao.nome_do_exame) == 'Teste de covid':
         form = ResultadoForms(initial={
             'requisicao': requisicao,
             'nome_do_exame': requisicao.nome_do_exame,
             'nome_paciente': requisicao.nome_paciente,
             'medico_requerente': requisicao.medico_requerente,
-            'laudo_exame': 'RT-PCR (P/N): '
+            'laudo_exame': '(param_test_covid)RT-PCR (P/N): '
         })
 
-    if str(requisicao.nome_do_exame) == 'teste toxicológico':
+    if str(requisicao.nome_do_exame) == 'Teste toxicológico':
         form = ResultadoForms(initial={
             'requisicao': requisicao,
             'nome_do_exame': requisicao.nome_do_exame,
             'nome_paciente': requisicao.nome_paciente,
             'medico_requerente': requisicao.medico_requerente,
-            'laudo_exame': 'SEGMED - PCP (N/P): '
+            'laudo_exame': '(param_toxicológico)SEGMED - PCP (N/P): '
         })
 
     contexto = {

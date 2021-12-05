@@ -66,8 +66,7 @@
                                         <li><a href="{% url 'dashboard' %}">Resultado dos exames</a></li>
 
                                         {% if  user.is_staff and not user.is_superuser %}
-                                            <li><a href="{% url 'admin:index' %}">Cadastrar Requisição</a></li>
-                                            <li><a href="{% url 'requisicao_list' %}">Ver Requisições</a></li>
+                                            <li><a href="{% url 'requisicao_list' %}">Requisições</a></li>
                                         {% endif %}
                                         <li><a href="{% url 'logout' %}">Logout</a></li>
                                     {% else %}

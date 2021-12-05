@@ -14,6 +14,16 @@
 <div class="container col-8">
     <h2>Requisicao</h2>
 
+    {% if user.is_authenticated %}
+        {% if  user.is_staff and not user.is_superuser %}
+            <div style="text-align:right">
+                 <td><a href="{% url 'cria_requisicao' %}" type="button" class="btn btn-info">Cadastrar nova requisição</a></td>
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+
     <div class="container col-12">
         <table border="0" class="table table-striped">
             {% if requisicoes %}
@@ -56,7 +66,7 @@
         </table>
 
         {% else %}
-        <h4>Nenhuma requisicao cadastrada</h4>
+        <h5>Nenhuma requisicao cadastrada</h5>
         {% endif %}
     </div>
 </div>

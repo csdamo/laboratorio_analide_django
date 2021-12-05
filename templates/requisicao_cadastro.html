@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/tubobolhas.png' %}" alt="">
+    </div>
+
+    {% include 'partials/_busca.html' %}
+    {% include 'partials/_menu.html' %}
+
+<div class="container col-8">
+    <h3>Cadastro de requisição de exames - Dr. {{ user.username }}</h3>
+
+{% include 'partials/_alertas.html' %}
+
+<!-- ##### Contact Form Area Start ##### -->
+<div class="contact-area section-padding-0-80">
+   <div class="container">
+       <div class="row">
+           <div class="col-12">
+               <div class="container col-10">
+                    <form action="" method="post">
+                        {% csrf_token %}
+
+                        {{form|crispy}}
+
+                        <input type="submit" value="Salvar" class="btn btn-success">
+                    </form>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+
+{% include  'partials/_footer.html' %}
+{% endblock %}
