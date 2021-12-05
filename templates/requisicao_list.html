@@ -54,7 +54,7 @@
                         {% endif %}
 
                         {% if  user.is_staff and not user.is_superuser %}
-                            <!-- <td><a href="" type="button" class="btn btn-info">Ver requisição</a></td> -->
+                            <td><a href="{% url 'edita_requisicao' requisicao.id %}" type="button" class="btn btn-info">Editar</a></td>
                         {% endif %}
                     {% endif %}
 

@@ -9,4 +9,5 @@ urlpatterns = [
     path('requisicao', views.requisicao_list, name='requisicao_list'),
     path('cadastrar_resultado/<int:requisicao_id>', views.cadastrar_resultado, name='cadastrar_resultado'),
     path('requisicao_cadastro', views.cria_requisicao, name='cria_requisicao'),
+    path('edita_requisicao/<int:requisicao_id>', views.edita_requisicao, name='edita_requisicao'),
 ]

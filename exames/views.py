@@ -104,6 +104,29 @@ def requisicao_list(request):
             return render(request, 'requisicao_list.html', dados)
 
 
+def edita_requisicao(request, requisicao_id):
+    requisicao = get_object_or_404(RequisicaoExame, pk=requisicao_id)
+    form = RequisicaoForm(instance=requisicao)
+
+    context = {
+        'form': form,
+        'requisicao': requisicao
+    }
+    if request.method == 'POST':
+        requisicao = RequisicaoExame.objects.get(id=requisicao_id)
+        form = RequisicaoForm(request.POST, instance=requisicao)
+        if form.is_valid():
+            categoria = form.save(commit=False)
+            categoria.save()
+            messages.success(request, 'Alterações salvas com sucesso')
+            return redirect('requisicao_list')
+    else:
+        context = {
+            'form': form
+        }
+        return render(request, 'edita_requisicao.html', context)
+    return render(request, 'edita_requisicao.html', context)
+
 
 # MÉTODO PARA USO DO FORMS com laudo prépreenchido
 def cadastrar_resultado(request, requisicao_id):

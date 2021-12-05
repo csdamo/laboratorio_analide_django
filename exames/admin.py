@@ -31,4 +31,4 @@ class ListandoRequisicaoExame(admin.ModelAdmin):
 admin.site.register(Exame, ListandoExames)
 # admin.site.register(RequisicaoExame, ListandoRequisicaoExame)
 # admin.site.register(Medico)
-# admin.site.register(ResultadoExame, ListandoResultados)
+admin.site.register(ResultadoExame, ListandoResultados)
