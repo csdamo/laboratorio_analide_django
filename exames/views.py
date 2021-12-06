@@ -148,7 +148,7 @@ def cadastrar_resultado(request, requisicao_id):
             'laudo_exame': 'glicemia em jejum mg/dl: '
         })
 
-    if str(requisicao.nome_do_exame) == 'Teste de colesterol':
+    if str(requisicao.nome_do_exame) == 'Teste de colesterol' or str(requisicao.nome_do_exame) == 'teste de colesterol':
         form = ResultadoForms(initial={
             'requisicao': requisicao,
             'nome_do_exame': requisicao.nome_do_exame,
